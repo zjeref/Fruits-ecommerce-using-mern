@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer } from 'react';
+
+import Home from './pages/Home'
+import { MockData } from './mockData';
+
+export const ProductContext = React.createContext(MockData);
+
+const reducer = (state, action) => {
+
+}
 
 function App() {
+
+  const [productData , dispatch] = useReducer(reducer, MockData.items);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ProductContext.Provider value={{productData:productData, productDispatch: dispatch}} >
+        <Home />
+      </ProductContext.Provider>
     </div>
   );
 }
